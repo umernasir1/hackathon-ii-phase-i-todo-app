@@ -37,16 +37,37 @@ curl -LsSf https://astral.sh/uv/install.sh | sh
 
 ## Installation
 
-```bash
-# Clone the repository
-git clone https://github.com/yourusername/HackatonII.git
-cd HackatonII
+### Option 1: Install directly from GitHub (Easiest)
 
-# Create virtual environment (UV handles this automatically)
-uv venv
+```bash
+# Install using pip
+pip install git+https://github.com/umernasir1/hackathon-ii-phase-i-todo-app.git
 
 # Run the application
+python -m src.main
+```
+
+### Option 2: Clone and run with UV
+
+```bash
+# Clone the repository
+git clone https://github.com/umernasir1/hackathon-ii-phase-i-todo-app.git
+cd hackathon-ii-phase-i-todo-app
+
+# Run with UV (recommended)
 uv run python src/main.py
+```
+
+### Option 3: Clone and run with standard Python
+
+```bash
+# Clone the repository
+git clone https://github.com/umernasir1/hackathon-ii-phase-i-todo-app.git
+cd hackathon-ii-phase-i-todo-app
+
+# Run directly
+cd src
+python main.py
 ```
 
 ## Usage
