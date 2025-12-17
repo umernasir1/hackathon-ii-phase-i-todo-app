@@ -1,5 +1,10 @@
 # Todo In-Memory Python Console App (Phase I)
 
+![Python Version](https://img.shields.io/badge/python-3.13+-blue.svg)
+![License](https://img.shields.io/badge/license-Educational-green.svg)
+![Status](https://img.shields.io/badge/status-Complete-success.svg)
+![Test](https://github.com/umernasir1/hackathon-ii-phase-i-todo-app/actions/workflows/test.yml/badge.svg)
+
 A command-line todo application built with Python 3.13+ that stores tasks in memory. Part of Hackathon II project demonstrating spec-driven development with Claude Code.
 
 ## Features

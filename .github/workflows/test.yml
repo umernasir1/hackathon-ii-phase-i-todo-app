@@ -1,0 +1,44 @@
+name: Test Application
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.13"]
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v5
+      with:
+        python-version: ${{ matrix.python-version }}
+
+    - name: Install UV
+      run: |
+        curl -LsSf https://astral.sh/uv/install.sh | sh
+        echo "$HOME/.cargo/bin" >> $GITHUB_PATH
+
+    - name: Verify installation
+      run: |
+        python --version
+        uv --version
+
+    - name: Test application runs
+      run: |
+        cd src
+        echo -e "add Test Task\nlist\nexit\nyes" | python main.py
+
+    - name: Check code syntax
+      run: |
+        python -m py_compile src/models.py
+        python -m py_compile src/task_manager.py
+        python -m py_compile src/cli.py
+        python -m py_compile src/main.py
