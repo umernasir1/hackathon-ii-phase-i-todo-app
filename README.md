@@ -1,281 +1,372 @@
-# Todo In-Memory Python Console App (Phase I)
+# Hackathon II - Todo Application
 
-![Python Version](https://img.shields.io/badge/python-3.13+-blue.svg)
+![Python Version](https://img.shields.io/badge/python-3.11+-blue.svg)
+![Next.js](https://img.shields.io/badge/Next.js-16-black.svg)
 ![License](https://img.shields.io/badge/license-Educational-green.svg)
-![Status](https://img.shields.io/badge/status-Complete-success.svg)
-![Test](https://github.com/umernasir1/hackathon-ii-phase-i-todo-app/actions/workflows/test.yml/badge.svg)
+![Status](https://img.shields.io/badge/status-Phase%20II%20Complete-success.svg)
 
-A command-line todo application built with Python 3.13+ that stores tasks in memory. Part of Hackathon II project demonstrating spec-driven development with Claude Code.
+A full-stack todo application demonstrating spec-driven development. Phase I is a Python console app with in-memory storage. Phase II is a full-stack web application with Next.js, FastAPI, and PostgreSQL.
 
-## Features
+## 🚀 Quick Start
 
-✅ **5 Basic Level Features Implemented**:
-1. **Add Tasks**: Create tasks with title and optional description
-2. **View Tasks**: Display all tasks in formatted table with status indicators
-3. **Mark Complete**: Toggle task completion status
-4. **Update Tasks**: Edit task titles and descriptions
-5. **Delete Tasks**: Remove tasks from the list
-
-## Prerequisites
-
-- Python 3.13+ ([Download](https://www.python.org/downloads/))
-- UV package manager ([Installation guide](https://github.com/astral-sh/uv))
-
-### Check Your Installation
-
+### Phase I - Console App (Completed)
 ```bash
-python --version  # Should be 3.13.x or higher
-uv --version      # Should show uv version
-```
-
-### Installing UV
-
-**Windows (PowerShell)**:
-```powershell
-powershell -c "irm https://astral.sh/uv/install.ps1 | iex"
-```
-
-**macOS/Linux**:
-```bash
-curl -LsSf https://astral.sh/uv/install.sh | sh
-```
-
-## Installation
-
-### Option 1: Install directly from GitHub (Easiest)
-
-```bash
-# Install using pip
-pip install git+https://github.com/umernasir1/hackathon-ii-phase-i-todo-app.git
-
-# Run the application
-python -m src.main
-```
-
-### Option 2: Clone and run with UV
-
-```bash
-# Clone the repository
-git clone https://github.com/umernasir1/hackathon-ii-phase-i-todo-app.git
-cd hackathon-ii-phase-i-todo-app
-
-# Run with UV (recommended)
-uv run python src/main.py
-```
-
-### Option 3: Clone and run with standard Python
-
-```bash
-# Clone the repository
-git clone https://github.com/umernasir1/hackathon-ii-phase-i-todo-app.git
-cd hackathon-ii-phase-i-todo-app
-
-# Run directly
 cd src
 python main.py
 ```
 
-## Usage
+### Phase II - Web Application (Completed)
 
-### Starting the App
+**Prerequisites**:
+- Python 3.11+
+- Node.js 18+
+- Neon PostgreSQL account (free tier)
 
+**Backend Setup**:
 ```bash
-uv run python src/main.py
+cd backend
+pip install -r requirements.txt
+# Configure .env with your Neon database URL
+python -m alembic upgrade head
+python -m uvicorn main:app --reload --port 8000
 ```
 
-You'll see:
-```
-╔════════════════════════════════════════════════╗
-║        Todo Console App - Phase I              ║
-║  Type 'help' for available commands            ║
-║  Type 'exit' to quit                           ║
-╚════════════════════════════════════════════════╝
-
-> _
-```
-
-### Commands
-
-**Add Tasks**:
+**Frontend Setup**:
 ```bash
-> add Buy groceries
-✓ Task 1 added successfully
-
-> add Call mom - Birthday wishes
-✓ Task 2 added successfully
+cd frontend
+npm install
+npm run dev
 ```
 
-**View Tasks**:
-```bash
-> list
-ID │ Status │ Title                    │ Description
-───┼────────┼──────────────────────────┼────────────────────
-1  │ ○      │ Buy groceries            │
-2  │ ○      │ Call mom                 │ Birthday wishes
+Access the app at `http://localhost:3000`
 
-2 tasks total (0 completed, 2 pending)
-```
-
-**Mark Complete**:
-```bash
-> complete 1
-✓ Task 1 marked as complete
-
-> uncomplete 1
-✓ Task 1 marked as incomplete
-```
-
-**Update Tasks**:
-```bash
-> update 1 title Buy groceries and supplies
-✓ Task 1 updated successfully
-
-> update 1 description milk, eggs, bread
-✓ Task 1 updated successfully
-```
-
-**Delete Tasks**:
-```bash
-> delete 2
-✓ Task 2 deleted successfully
-```
-
-**Get Help**:
-```bash
-> help
-# Shows all available commands with examples
-```
-
-**Exit**:
-```bash
-> exit
-⚠️  WARNING: Tasks are not saved. They will be lost when you exit.
-Are you sure you want to exit? (yes/no): yes
-Goodbye!
-```
-
-## Command Reference
-
-| Command | Description | Example |
-|---------|-------------|---------|
-| `add <title>` | Add task with title only | `add Buy groceries` |
-| `add <title> - <description>` | Add task with description | `add Buy groceries - milk, eggs` |
-| `list`, `view`, `show` | Display all tasks | `list` |
-| `complete <id>`, `done <id>` | Mark task as complete | `complete 1` |
-| `uncomplete <id>` | Mark task as incomplete | `uncomplete 1` |
-| `update <id> title <text>` | Update task title | `update 1 title New title` |
-| `update <id> description <text>` | Update description | `update 1 description New desc` |
-| `delete <id>`, `remove <id>` | Delete task | `delete 1` |
-| `help` | Show available commands | `help` |
-| `exit`, `quit` | Exit application | `exit` |
-
-## Important Notes
-
-### ⚠️ Data is NOT Saved
-
-**Tasks are stored in memory only**. When you exit the app, all tasks are permanently lost. This is by design for Phase I of the hackathon.
-
-**Why?**: Phase I requirements specify in-memory storage only. Persistence (file or database) will be added in Phase II.
-
-### Validation Rules
-
-- **Title**: 1-200 characters (required)
-- **Description**: 0-1000 characters (optional)
-- **Task ID**: Positive integer, auto-assigned, never reused
-
-### Performance
-
-- Response time: < 100ms for all operations
-- Capacity: Handles up to 1000 tasks efficiently
-- Memory usage: ~1KB per task
-
-## Project Structure
+## 📋 Project Structure
 
 ```
 HackatonII/
-├── src/
-│   ├── __init__.py       # Package initialization
-│   ├── models.py         # Task dataclass with validation
-│   ├── task_manager.py   # Business logic (CRUD operations)
-│   ├── cli.py            # CLI interface (command parsing, output)
-│   └── main.py           # Application entry point
-├── specs/                # Specification documents
-│   └── master/
-│       ├── spec.md       # Feature specification
-│       ├── plan.md       # Implementation plan
-│       ├── tasks.md      # Task breakdown
-│       ├── data-model.md # Data model documentation
-│       └── research.md   # Technology decisions
-├── .gitignore
-├── pyproject.toml        # UV project configuration
-├── README.md             # This file
-└── CLAUDE.md             # Claude Code development guide
+├── src/                  # Phase I: Console app (Python)
+│   ├── models.py
+│   ├── task_manager.py
+│   ├── cli.py
+│   └── main.py
+├── backend/              # Phase II: FastAPI backend
+│   ├── app/
+│   │   ├── models.py          # SQLModel database models
+│   │   ├── database.py        # Database connection
+│   │   ├── auth.py            # JWT authentication
+│   │   ├── config.py          # Settings
+│   │   └── routers/
+│   │       ├── auth.py        # /auth/register, /auth/login
+│   │       └── tasks.py       # /api/{user_id}/tasks CRUD
+│   ├── alembic/               # Database migrations
+│   ├── main.py                # FastAPI app entry point
+│   ├── requirements.txt
+│   └── README.md
+├── frontend/             # Phase II: Next.js frontend
+│   ├── app/
+│   │   ├── layout.tsx
+│   │   ├── page.tsx           # Landing page
+│   │   ├── login/             # Login page
+│   │   ├── signup/            # Registration page
+│   │   └── dashboard/         # Main todo dashboard
+│   ├── lib/
+│   │   ├── types.ts           # TypeScript types
+│   │   ├── api.ts             # Backend API client
+│   │   └── auth-context.tsx   # Authentication context
+│   ├── package.json
+│   └── README.md
+└── specs/                # Specification documents
+    ├── master/                # Phase I specs
+    └── phase-ii-web-app/      # Phase II specs
+        ├── spec.md
+        ├── plan.md
+        └── tasks.md
 ```
 
-## Development
+## ✨ Features
 
-### Architecture
+### Phase I - Console App
+✅ **5 Basic Level Features**:
+1. Add tasks with title and description
+2. View all tasks in formatted table
+3. Mark tasks as complete/incomplete
+4. Update task title and description
+5. Delete tasks
 
-**3-Layer Clean Architecture**:
-- **Data Layer** (`models.py`): Task entity with validation
-- **Business Logic** (`task_manager.py`): CRUD operations, in-memory storage
-- **Interface Layer** (`cli.py`): Command parsing, output formatting
+### Phase II - Web Application
+✅ **All Phase I features** migrated to web interface
+✅ **User Authentication**: Register and login with email/password
+✅ **Persistent Storage**: PostgreSQL database via Neon
+✅ **Responsive Design**: Works on mobile, tablet, and desktop
+✅ **RESTful API**: FastAPI backend with full CRUD operations
+✅ **Type Safety**: TypeScript frontend, Python type hints
+✅ **JWT Tokens**: Secure authentication with 7-day expiry
+✅ **Real-time Updates**: Instant UI feedback for all operations
 
-### Type Safety
+## 🏗️ Technology Stack
 
-All code uses Python type hints per constitution Principle II:
-```python
-def add_task(self, title: str, description: str = "") -> Task:
-    ...
+### Phase II Stack
+- **Frontend**: Next.js 16+ (App Router), React 19, TypeScript, Tailwind CSS
+- **Backend**: FastAPI, Python 3.11+, SQLModel, Pydantic
+- **Database**: Neon PostgreSQL (serverless)
+- **Authentication**: JWT tokens with bcrypt password hashing
+- **API**: RESTful endpoints with OpenAPI documentation
+- **Development**: UV package manager (Python), npm (Node.js)
+
+## 📚 API Documentation
+
+### Public Endpoints
+- `POST /auth/register` - Create new user account
+- `POST /auth/login` - Authenticate and receive JWT token
+- `GET /health` - Health check
+
+### Protected Endpoints (require JWT)
+- `GET /api/{user_id}/tasks` - Get all user's tasks
+- `POST /api/{user_id}/tasks` - Create new task
+- `GET /api/{user_id}/tasks/{task_id}` - Get specific task
+- `PUT /api/{user_id}/tasks/{task_id}` - Update task
+- `DELETE /api/{user_id}/tasks/{task_id}` - Delete task
+
+Interactive API docs: `http://localhost:8000/docs`
+
+## 🔧 Configuration
+
+### Backend (.env)
+```bash
+DATABASE_URL=postgresql://user:password@host/database?sslmode=require
+JWT_SECRET=your-super-secret-jwt-key-change-this
+JWT_ALGORITHM=HS256
+ACCESS_TOKEN_EXPIRE_DAYS=7
+FRONTEND_URL=http://localhost:3000
 ```
 
-### Error Handling
-
-All errors display user-friendly messages:
-```python
-try:
-    task = manager.add_task(title, description)
-except ValueError as e:
-    print(f"Error: {e}")
+### Frontend (.env.local)
+```bash
+NEXT_PUBLIC_API_URL=http://localhost:8000
 ```
 
-## Troubleshooting
+## 🗄️ Database Schema
 
-**Python 3.13 not found**:
-- Install from [python.org](https://www.python.org/downloads/)
+### Users Table
+```sql
+CREATE TABLE users (
+    id SERIAL PRIMARY KEY,
+    email VARCHAR(255) UNIQUE NOT NULL,
+    password_hash VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP DEFAULT NOW()
+);
+```
 
-**UV not found**:
-- Install using the commands in the Prerequisites section
+### Tasks Table
+```sql
+CREATE TABLE tasks (
+    id SERIAL PRIMARY KEY,
+    user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    title VARCHAR(255) NOT NULL,
+    description TEXT,
+    completed BOOLEAN DEFAULT FALSE,
+    created_at TIMESTAMP DEFAULT NOW(),
+    updated_at TIMESTAMP DEFAULT NOW()
+);
 
-**Module not found errors**:
-- Ensure you're running from the `HackatonII` directory
-- Use `uv run python src/main.py` instead of `python src/main.py`
+CREATE INDEX idx_tasks_user_id ON tasks(user_id);
+```
 
-**Virtual environment issues**:
-- UV handles virtual environments automatically
-- If needed, delete `.venv/` and run `uv venv` again
+## 🚦 Getting Started - Detailed Guide
 
-## Contributing
+### Step 1: Clone Repository
+```bash
+git clone https://github.com/umernasir1/hackathon-ii-todo-app.git
+cd HackatonII
+```
 
-This is a hackathon project developed using spec-driven development (SDD) workflow:
+### Step 2: Set Up Neon Database
+1. Go to [https://console.neon.tech](https://console.neon.tech)
+2. Create new project: "hackathon-todo-app"
+3. Copy connection string
+4. Paste into `backend/.env` as `DATABASE_URL`
 
-1. **Specification** (`specs/master/spec.md`) - User stories and requirements
-2. **Planning** (`specs/master/plan.md`) - Technical approach and architecture
-3. **Tasks** (`specs/master/tasks.md`) - Task breakdown by user story
-4. **Implementation** - Code generation with Claude Code
+### Step 3: Install Backend Dependencies
+```bash
+cd backend
+pip install -r requirements.txt
+```
 
-See `CLAUDE.md` for development instructions.
+### Step 4: Run Database Migrations
+```bash
+cd backend
+python -m alembic upgrade head
+```
 
-## License
+### Step 5: Start Backend Server
+```bash
+cd backend
+python -m uvicorn main:app --reload --port 8000
+```
+
+### Step 6: Install Frontend Dependencies
+```bash
+cd frontend
+npm install
+```
+
+### Step 7: Start Frontend Server
+```bash
+cd frontend
+npm run dev
+```
+
+### Step 8: Access Application
+Open browser to `http://localhost:3000`
+
+## 🧪 Testing
+
+### Backend
+```bash
+cd backend
+# Start backend server
+python -m uvicorn main:app --reload --port 8000
+
+# In another terminal, test endpoints
+curl http://localhost:8000/health
+curl -X POST http://localhost:8000/auth/register \
+  -H "Content-Type: application/json" \
+  -d '{"email":"test@example.com","password":"test123"}'
+```
+
+### Frontend
+```bash
+cd frontend
+npm run build  # Check for TypeScript errors
+npm run dev    # Test in browser
+```
+
+## 📱 User Guide
+
+### Registration
+1. Click "Sign Up" on landing page
+2. Enter email and password (min 6 characters)
+3. Click "Sign up" - you'll be automatically logged in
+
+### Login
+1. Click "Login" on landing page
+2. Enter your email and password
+3. Click "Sign in"
+
+### Managing Tasks
+1. **Add Task**: Fill in title and optional description, click "Add Task"
+2. **View Tasks**: All tasks displayed in list with status
+3. **Complete Task**: Click checkbox to toggle completion
+4. **Edit Task**: Click "Edit", modify fields, click "Save"
+5. **Delete Task**: Click "Delete" and confirm
+
+### Logout
+Click "Logout" button in header
+
+## 🐛 Troubleshooting
+
+### Backend Issues
+
+**Cannot connect to database**:
+- Verify `DATABASE_URL` in `.env` is correct
+- Check Neon database is active
+- Ensure `?sslmode=require` is in connection string
+
+**Alembic migration errors**:
+```bash
+# Reset migrations (development only)
+cd backend
+python -m alembic downgrade base
+python -m alembic upgrade head
+```
+
+**CORS errors**:
+- Verify `FRONTEND_URL` in backend `.env` matches frontend URL
+- Check backend server is running on port 8000
+
+### Frontend Issues
+
+**Cannot connect to backend**:
+- Verify `NEXT_PUBLIC_API_URL` in `.env.local` is correct
+- Check backend server is running
+- Open `http://localhost:8000/docs` to verify backend
+
+**TypeScript errors**:
+```bash
+cd frontend
+npm run build  # Check for errors
+```
+
+**Authentication not working**:
+- Clear browser localStorage (Application > Local Storage > Clear)
+- Try logging in again
+
+## 📖 Development Workflow
+
+This project follows spec-driven development (SDD):
+
+1. **Specification** (`specs/.../spec.md`) - User stories and requirements
+2. **Planning** (`specs/.../plan.md`) - Architecture and technical decisions
+3. **Tasks** (`specs/.../tasks.md`) - Atomic task breakdown
+4. **Implementation** - Code development
+5. **Testing** - Validation of features
+
+See individual `CLAUDE.md` files in `backend/` and `frontend/` for detailed development guidelines.
+
+## 🎯 Project Milestones
+
+- ✅ Phase I: Console App (Dec 10, 2025)
+- ✅ Phase II Specification (Dec 18, 2025)
+- ✅ Phase II Implementation Plan (Dec 18, 2025)
+- ✅ Phase II Backend Setup (Dec 18, 2025)
+- ✅ Phase II Frontend Setup (Dec 18, 2025)
+- ✅ Phase II Authentication System (Dec 18, 2025)
+- ✅ Phase II Full Implementation (Dec 18, 2025)
+- ✅ Phase II Testing & Validation (Dec 21, 2025)
+- ⚡ Phase II Ready for Deployment
+
+## 📡 Deployment Status
+
+### Ready for Production
+The application is fully implemented, tested, and ready to deploy:
+
+**Backend:**
+- ✅ FastAPI application complete
+- ✅ Database migrations configured
+- ✅ JWT authentication implemented
+- ✅ All API endpoints tested
+- ✅ Deployment configs ready (Procfile, railway.toml, runtime.txt)
+- 🔜 Deploy to: Railway / Render / Fly.io
+
+**Frontend:**
+- ✅ Next.js 16 application complete
+- ✅ All pages implemented
+- ✅ Authentication flow working
+- ✅ Production build tested
+- ✅ Deployment config ready (vercel.json)
+- 🔜 Deploy to: Vercel
+
+**Database:**
+- ✅ Neon PostgreSQL configured
+- ✅ Schema migrations ready
+- ✅ Connection tested
+
+### Deployment Instructions
+See [DEPLOYMENT.md](./DEPLOYMENT.md) for step-by-step deployment guide.
+
+### Testing
+See [TESTING_CHECKLIST.md](./TESTING_CHECKLIST.md) for comprehensive testing checklist.
+
+## 📄 License
 
 This project is part of Hackathon II educational assignment.
 
-## Acknowledgments
+## 🙏 Acknowledgments
 
 - Built with Claude Code using spec-driven development
-- Follows constitution principles: Type Safety, Simplicity & Pragmatism, Observability
-- Implements 5 Basic Level features per hackathon requirements
+- Follows clean architecture principles
+- Implements PIAIC Hackathon II requirements
 
 ---
 
-**Version**: 1.0.0 | **Phase**: Phase I (Console App) | **Date**: 2025-12-17
+**Version**: 2.0.0 | **Phase**: Phase II Complete - Ready for Deployment | **Date**: 2025-12-21
