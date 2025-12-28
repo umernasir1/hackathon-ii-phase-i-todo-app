@@ -1,0 +1,15 @@
+VERCEL ENVIRONMENT VARIABLES - COPY AND PASTE
+================================================================
+
+Variable Name: NEXT_PUBLIC_API_URL
+Variable Value: [PASTE YOUR RAILWAY URL HERE]
+
+Example: https://hackathon-ii-production.up.railway.app
+
+================================================================
+IMPORTANT:
+1. Get your Railway backend URL first (from step 1)
+2. Then paste it here as the value for NEXT_PUBLIC_API_URL
+3. Make sure it starts with https:// (not http://)
+4. Do NOT include /api or any trailing slashes
+================================================================

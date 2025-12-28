@@ -1,0 +1,18 @@
+RAILWAY ENVIRONMENT VARIABLES - COPY AND PASTE THESE
+================================================================
+
+Copy each variable below and paste into Railway's environment variables section.
+
+DATABASE_URL=postgresql://neondb_owner:npg_crCTIlG91iJR@ep-floral-bird-ahxuxm4r-pooler.c-3.us-east-1.aws.neon.tech/neondb?sslmode=require
+
+JWT_SECRET=a1fd210da153ee29b3595e54fe87dde55c9a24d213f9bc5f22f63b2bba5c54b8
+
+JWT_ALGORITHM=HS256
+
+ACCESS_TOKEN_EXPIRE_DAYS=7
+
+FRONTEND_URL=https://your-app.vercel.app
+
+================================================================
+NOTE: You'll update FRONTEND_URL after you get your Vercel URL in step 2.
+================================================================
