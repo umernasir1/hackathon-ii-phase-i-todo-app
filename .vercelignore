@@ -1,0 +1,10 @@
+backend/
+backendalembic/
+backendalembicversions/
+backendapp/
+backendapprouters/
+docs/
+specs/
+src/
+*.md
+!frontend/**
