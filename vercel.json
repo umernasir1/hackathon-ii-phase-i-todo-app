@@ -1,6 +1,6 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "buildCommand": "chmod +x build.sh && ./build.sh",
-  "installCommand": "chmod +x install.sh && ./install.sh",
+  "buildCommand": "npm run vercel-build",
+  "installCommand": "npm install",
   "outputDirectory": "frontend/.next"
 }
