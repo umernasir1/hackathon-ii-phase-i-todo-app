@@ -3,8 +3,8 @@ backendalembic/
 backendalembicversions/
 backendapp/
 backendapprouters/
+frontend/
 docs/
 specs/
 src/
 *.md
-!frontend/**

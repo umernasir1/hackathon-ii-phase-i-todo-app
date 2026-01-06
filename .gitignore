@@ -58,3 +58,12 @@ logs/
 
 # UV
 .uv/
+
+# Next.js (at root)
+node_modules/
+.next/
+out/
+.vercel
+
+# Frontend (legacy directory - now moved to root)
+frontend/
