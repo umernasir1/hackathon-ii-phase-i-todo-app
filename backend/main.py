@@ -31,8 +31,17 @@ app = FastAPI(
 origins = [
     "http://localhost:3000",  # Next.js dev server
     "https://localhost:3000",
-    settings.frontend_url
 ]
+
+# Add FRONTEND_URL if configured
+if settings.frontend_url and settings.frontend_url.strip():
+    origins.append(settings.frontend_url)
+
+# Also add common Vercel patterns for preview deployments
+origins.extend([
+    "https://hackathon-ii-todo-app.vercel.app",
+    "https://hackathon-ii-todo-app-git-main-umernasir1s-projects.vercel.app",
+])
 
 app.add_middleware(
     CORSMiddleware,
